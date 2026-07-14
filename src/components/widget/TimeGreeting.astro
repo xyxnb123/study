@@ -35,7 +35,7 @@ const { class: className, style } = Astro.props;
     </div>
 
     <div class="w-full h-36 relative overflow-hidden time-image-container">
-        <div class="absolute inset-0 bg-cover bg-center transition-opacity duration-1000 opacity-0 time-image"></div>
+        <div class="absolute inset-0 bg-cover bg-center transition-opacity duration-100 opacity-0 time-image"></div>
         <div class="absolute inset-0 bg-gradient-to-t from-(--card-bg) via-transparent to-transparent opacity-60"></div>
     </div>
 </div>
@@ -44,7 +44,7 @@ const { class: className, style } = Astro.props;
 (() => {
   const weekDays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
-  // 这里改成你 time-bg 里所有图片文件名
+  // 本地图片列表
   const localBgList = [
     "/time-bg/bg1.png",
     "/time-bg/bg2.png",
@@ -64,7 +64,16 @@ const { class: className, style } = Astro.props;
     return localBgList[randomIdx];
   }
 
-  // 页面加载时随机一张
+  // 【改动1：预加载所有图片，打开页面就缓存】
+  function preloadAllBg() {
+    localBgList.forEach(src => {
+      const tempImg = new Image();
+      tempImg.src = src;
+    });
+  }
+  preloadAllBg();
+
+  // 页面加载随机一张
   window.timeGreetingImage = getRandomLocalBg();
 
   function updateTimeGreeting() {
@@ -129,16 +138,13 @@ const { class: className, style } = Astro.props;
       });
     });
 
+    // 【改动2：移除data-image-set判断锁，直接赋值图片】
     imageContainers.forEach(el => {
-      el.removeAttribute('data-image-set');
-      if (el.getAttribute('data-image-set') !== 'true') {
-        el.style.backgroundImage = `url('${window.timeGreetingImage}')`;
-        el.setAttribute('data-image-set', 'true');
-        setTimeout(() => {
-          el.classList.remove('opacity-0');
-          el.classList.add('opacity-100');
-        }, 50);
-      }
+      el.style.backgroundImage = `url('${window.timeGreetingImage}')`;
+      setTimeout(() => {
+        el.classList.remove('opacity-0');
+        el.classList.add('opacity-100');
+      }, 0);
     });
   }
 
