@@ -156,8 +156,7 @@
   table {
     @apply my-4;
     width: 100%;
-    border-collapse: separate;
-    border-spacing: 0;
+    border-collapse: collapse; /* 关键：边框合并，显示完整网格线 */
     border-radius: calc(var(--radius-large) - 0.5rem);
     overflow: hidden;
   }
@@ -175,17 +174,12 @@
   td {
     @apply px-3 py-2 text-left;
     min-width: unset;
-    border: none;
+    border: 1px solid var(--line-color); /* 四周全部添加边框线条 */
     word-break: break-all;
     white-space: normal;
-
-    &:not(:last-child) {
-      border-right: 1px solid var(--line-color);
-    }
   }
 
   th {
-    /* 表头透明底色，取消蓝色背景 */
     @apply bg-transparent font-semibold text-inherit border-b border-(--line-color);
   }
 
