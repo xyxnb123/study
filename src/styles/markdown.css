@@ -50,7 +50,8 @@
   }
 
   code {
-    @apply bg-(--inline-code-bg) text-(--inline-code-color) px-1 py-0.5 rounded-md overflow-hidden;
+    /* 移除行内代码蓝色文字+浅蓝色背景，和普通文字样式统一 */
+    @apply bg-transparent text-inherit px-0 py-0 rounded-none overflow-hidden;
 
     font-family:
       var(--font-jetbrains-mono),
@@ -154,8 +155,7 @@
 .custom-md {
   table {
     @apply my-4;
-    min-width: 100%;
-    width: max-content;
+    width: 100%;
     border-collapse: separate;
     border-spacing: 0;
     border-radius: calc(var(--radius-large) - 0.5rem);
@@ -174,9 +174,10 @@
   th,
   td {
     @apply px-3 py-2 text-left;
-    min-width: 120px;
+    min-width: unset;
     border: none;
-    word-break: break-word;
+    word-break: break-all;
+    white-space: normal;
 
     &:not(:last-child) {
       border-right: 1px solid var(--line-color);
@@ -184,15 +185,16 @@
   }
 
   th {
-    @apply bg-(--btn-regular-bg) font-semibold text-(--btn-content) border-b border-(--line-color);
+    /* 表头透明底色，取消蓝色背景 */
+    @apply bg-transparent font-semibold text-inherit border-b border-(--line-color);
   }
 
   td {
-    @apply bg-(--card-bg);
+    @apply bg-transparent;
   }
 
   tr:nth-child(even) td {
-    @apply bg-(--btn-plain-bg-active);
+    @apply bg-transparent;
   }
 }
 
@@ -202,15 +204,14 @@ body.wallpaper-transparent .custom-md {
   }
 
   th {
-    background-color: color-mix(in oklch, var(--btn-regular-bg) 72%, transparent);
+    background-color: transparent;
   }
 
   td {
-    background-color: color-mix(in oklch, var(--card-bg-transparent) 92%, transparent);
+    background-color: transparent;
   }
 
   tr:nth-child(even) td {
-    background-color: color-mix(in oklch, var(--btn-plain-bg-active) 68%, transparent);
+    background-color: transparent;
   }
 }
-
