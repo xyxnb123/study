@@ -1,7 +1,7 @@
 ---
 title: 滑动窗口：定长滑动窗口
 published: 2026-07-16
-pinned: true
+pinned: false
 description: 主要讲解定长滑动窗口的原理以及我的刷题过程
 tags:
   - Python
