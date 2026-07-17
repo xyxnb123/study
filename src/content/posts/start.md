@@ -1,7 +1,7 @@
 ---
 title: "博客开篇：从零搭建我的技术学习小站"
 published: 2026-07-14
-pinned: true
+pinned: false
 description: 记录个人技术博客从零搭建、部署上线的全过程，分享建站初衷、技术栈与后续更新规划。。
 tags: [Markdown, Firefly, 博客, 主题, 模板]
 category: 我的第一篇文章

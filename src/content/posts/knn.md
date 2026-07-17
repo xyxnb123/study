@@ -1,7 +1,7 @@
 ---
 title: "KNN 算法详解：从原理到实战"
 published: 2026-07-14
-pinned: true
+pinned: false
 description: 本文从零拆解 K 近邻 (KNN) 算法核心原理实现 sklearn 实战案例，包含特征标准化、调参优化完整流程，适合机器学习入门读者系统掌握 KNN 分类与回归应用。
 tags: [knn 算法、机器学习、监督学习、分类回归、距离度量]
 category: 机器学习
