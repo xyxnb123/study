@@ -120,7 +120,13 @@
     overflow-x: auto;
     margin: 1em 0;
   }
-
+  img {
+  @apply block mx-auto my-6 rounded-lg;
+  /* 全局最大宽度，单位可改 px / % */
+  max-width: 85%;
+  /* 高度自动等比例缩放，不变形 */
+  height: auto;
+}
   .horizontal-scroll-container {
     max-width: 100%;
     overflow-x: auto;
