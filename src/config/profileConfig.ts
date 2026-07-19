@@ -9,7 +9,7 @@ export const profileConfig: ProfileConfig = {
 		{
 			name: "QQ",
 			icon: "fa7-brands:qq",
-			url: "https://qm.qq.com/q/HghbPuReoy",
+			url: "https://qm.qq.com/q/zBRNvVivQc",
 			showName: true, // 图标+文字，访客一眼看懂
 		},
 		{
