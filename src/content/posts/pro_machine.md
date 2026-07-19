@@ -8,9 +8,7 @@ category: 机器学习
 draft: false
 # image: ./images/firefly2.avif
 ---
-
-# 机器学习建模细节：数据准备、特征放缩、交叉验证、参数优化
-## 一、数据准备：数据清洗与数据集划分）
+## 一、数据准备：数据清洗与数据集划分
 ### 1. 数据集划分 Train/Val/Test Split
 #### 1.1 三集合分工
 ![](pro_machine_p1.png)
@@ -32,7 +30,7 @@ draft: false
 1. 划分前打乱数据（时序数据除外，需按时间切分，防未来泄露）；
 2. 测试集全程封存，所有调参与验证仅用训练+验证集。
 
-#### 1.4 代码调用
+#### 1.5 代码调用
 使用 `sklearn.model_selection.train_test_split`，先拆测试集，再拆验证集，分层保证类别均衡。
 
 函数原型：
