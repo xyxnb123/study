@@ -4,7 +4,7 @@ published: 2026-07-19
 pinned: false
 description: 零基础详解 Sklearn 所有本地 load_ 系列数据集，无需联网、开箱即用，适合机器学习入门练手与算法实战。
 tags: [sklearn, 数据库, 机器学习, 算法实战]
-category: 我的第一篇文章
+category: 机器学习
 draft: false
 # image: ./images/firefly2.avif
 ---
