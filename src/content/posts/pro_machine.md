@@ -174,7 +174,7 @@ df["value_robust"] = scaler.fit_transform(df[["value"]])
 |MinMax 归一化|[0,1]|极弱|有边界数据、KNN/SVM/深度学习|
 |Robust 稳健缩放|无固定区间|极强|含异常值的噪声数据|
 
-# 三、模型评估：交叉验证策略与任务评价指标
+## 三、模型评估：交叉验证策略与任务评价指标
 
 ### 1. K折交叉验证（K-Fold CV）
 ![](pro_machine_p2.png)
