@@ -82,15 +82,64 @@ msno.bar(df)      # 缺失柱状图
 - < 5%：可删除样本（MCAR）；
 - 5%~30%：推荐填充；
 - 50%：信息过少，建议直接删除该列。
-
 #### 2.3 常见填充方法
-- **删除法**：`df.dropna(axis=0)`（缺失极少且 MCAR）
-- **常数填充**：`fillna(0)` 或 `fillna("未知")`（缺失有业务含义）
-- **均值/中位数填充**：`fillna(df.mean())`（无异常值用均值，有极值用中位数）
-- **众数填充**（分类）：`df['brand'].mode()[0]`
-- **时序插值**（时间序列）：`ffill`、`bfill`、`interpolate(method='linear')`
-- **模型填充**：KNN、IterativeImputer（高精度，适合中小数据或竞赛）
 
+根据缺失类型与字段属性，选择合适的填充方案：
+
+**（1）删除法**
+缺失占比极低（<5%）且为 MCAR 时，直接删除含缺失值的样本或全空列。
+```python
+# 删除含任意空值的行
+df_clean = df.dropna(axis=0)
+# 删除全部为空的列
+df_clean = df.dropna(axis=1, how='all')
+```
+
+**（2）常数填充**
+缺失值本身具备业务含义（如"未填写""无记录"），填充固定值。
+```python
+# 数值特征填 0
+df['score'] = df['score'].fillna(0)
+# 分类特征填"未知"
+df['gender'] = df['gender'].fillna('未知')
+```
+
+**（3）均值 / 中位数填充**（仅数值特征）
+- 数据分布均匀、无极端值时用均值；
+- 存在明显离群点时用中位数，抗干扰更强。
+```python
+# 均值填充
+df['income'] = df['income'].fillna(df['income'].mean())
+# 中位数填充（推荐）
+df['income'] = df['income'].fillna(df['income'].median())
+```
+
+**（4）众数填充**（分类特征）
+离散标签专用，用出现频率最高的类别填充。
+```python
+mode_val = df['brand'].mode()[0]
+df['brand'] = df['brand'].fillna(mode_val)
+```
+
+**（5）时序插值**（时间序列专用）
+均值填充会抹平趋势，传感器、流量、股价等连续数据优先插值。
+```python
+# 前向填充（用上一条记录）
+df['flow'] = df['flow'].fillna(method='ffill')
+# 线性插值（保留连续变化趋势）
+df['flow'] = df['flow'].interpolate(method='linear')
+```
+**（6）模型填充**（高精度方案）
+利用特征间关联关系预测缺失值，如 KNN 填充、IterativeImputer 迭代填充。
+```python
+from sklearn.impute import KNNImputer, IterativeImputer
+# KNN 填充（利用邻近样本）
+imputer = KNNImputer(n_neighbors=5)
+df_imputed = imputer.fit_transform(df)
+# 迭代多重填充（精度更高，计算开销大）
+imputer = IterativeImputer(max_iter=10, random_state=42)
+df_imputed = imputer.fit_transform(df)
+```
 **各类填充方法对比**：
 
 | 填充方法 | 优点 | 缺点 | 适用场景 |
