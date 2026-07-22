@@ -1,6 +1,6 @@
 ---
 title: "KNN项目实战：鸢尾花的分类"
-published: 2026-07-14
+published: 2026-07-22
 pinned: false
 description: 基于scikit-learn实现K近邻(KNN)算法，使用经典鸢尾花数据集完成多分类任务，包含数据集加载、数据划分、模型训练、参数调优与结果可视化完整流程。
 tags: [机器学习, 项目实战, KNN, sklearn, 分类算法]
