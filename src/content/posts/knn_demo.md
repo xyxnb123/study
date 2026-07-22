@@ -8,18 +8,7 @@ category: 机器学习
 draft: false
 # image: ./images/firefly2.avif
 ---
-
-
----
-
 # 从零搭建 KNN 鸢尾花分类器：全流程实践 + 交叉验证调参
-
-> **关键词**：KNN、鸢尾花数据集、网格搜索、交叉验证、特征标准化、模型评估、混淆矩阵  
-> **适用读者**：机器学习初学者、数据分析师、Kaggle 新手  
-> **完成时间**：约 20 分钟（含运行时间）
-
----
-
 ## 目录
 1. [环境准备与库导入](#1-环境准备与库导入)  
 2. [加载数据集与 EDA 探索](#2-加载数据集与-eda-探索)  
@@ -30,9 +19,7 @@ draft: false
 7. [用最优模型预测测试集](#7-用最优模型预测测试集)  
 8. [模型评估 —— 混淆矩阵与多分类指标](#8-模型评估--混淆矩阵与多分类指标)  
 9. [完整代码附录](#9-完整代码附录)
-
 ---
-
 ## 1. 环境准备与库导入
 **代码**：
 ```python
@@ -46,7 +33,6 @@ import matplotlib.pyplot as plt # 导入可视化
 import seaborn as sns # 导入可视化
 import pandas as pd
 import numpy as np
-
 # 设置图片中文正常显示
 plt.rcParams["font.family"] = ["SimHei]
 plt.rcParams["axes.unicode_minus"] = False
@@ -60,7 +46,6 @@ iris = load_iris(as_frame=True)
 iris_data = iris.frame
 feature_names = iris.feature_names
 target_names = iris.target_names
-
 # 查看基础信息
 print("===== 数据集基础信息 =====")
 print("数据集前5行：")
@@ -69,12 +54,10 @@ print("\n数据集描述统计：")
 print(iris_data.describe())
 print("\n各类样本数量：")
 print(iris_data["target"].value_counts())
-
 # 划分特征X、标签y（修复二维列向量警告，取一维Series）
 X = iris_data.iloc[:, :-1]
 y = iris_data.iloc[:, -1]
 ```
-
 **输出**：
 ```
 ===== 数据集基础信息 =====
@@ -92,10 +75,8 @@ y = iris_data.iloc[:, -1]
 2    50
 Name: target, dtype: int64
 ```
-
 - 共 150 个样本，4 个数值特征，3 个类别（每类 50 个）。  
 - 特征量纲不同（花萼长度 ~5cm，花瓣宽度 ~0.2cm），后续必须标准化。
-
 ## 3. 划分训练集与测试集
 **代码**：
 ```python
@@ -146,9 +127,7 @@ Fitting 5 folds for each of 11 candidates, totalling 55 fits
 交叉验证平均准确率：0.9667
 ```
 ## 6. K 值影响曲线可视化
-
 **代码**：
-
 ```python
 # ===================== 6. 绘制K值与交叉验证准确率变化曲线 =====================
 cv_results = grid_search.cv_results_
@@ -163,7 +142,6 @@ plt.xticks(k_list)
 plt.grid(True, alpha=0.3)
 plt.show()
 ```
-
 ![](knn_demo_p1.png)  
 - 横轴：K 值，纵轴：交叉验证准确率。  
 - 曲线通常在 K=1 时略低（过拟合风险），K=3~7 达到峰值，之后缓慢下降。
@@ -196,13 +174,11 @@ acc = accuracy_score(y_test, y_pred)
 pre_macro = precision_score(y_test, y_pred, average="macro")
 rec_macro = recall_score(y_test, y_pred, average="macro")
 f1_macro = f1_score(y_test, y_pred, average="macro")
-
 print("\n===== 测试集模型评估指标(Macro平均) =====")
 print(f"准确率 Accuracy: {acc:.4f}")
 print(f"精确率 Precision: {pre_macro:.4f}")
 print(f"召回率 Recall: {rec_macro:.4f}")
 print(f"F1分数 F1-score: {f1_macro:.4f}")
-
 train_acc = best_knn.score(X_train_scaled, y_train)
 print(f"\n训练集准确率：{train_acc:.4f} | 测试集准确率：{acc:.4f}")
 if train_acc - acc > 0.05:
@@ -233,7 +209,6 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, confusion_matrix
 import matplotlib.pyplot as plt
 import seaborn as sns
-
 
 # 设置图片中文正常显示
 plt.rcParams["font.family"] = ["SimHei", "WenQuanYi Micro Hei", "Heiti TC"]
