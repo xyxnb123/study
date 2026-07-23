@@ -5,7 +5,7 @@ pinned: false
 description: 基于scikit-learn实现K近邻(KNN)算法，使用经典鸢尾花数据集完成多分类任务，包含数据集加载、数据划分、模型训练、参数调优与结果可视化完整流程。
 tags: [机器学习, 项目实战, KNN, sklearn, 分类算法]
 category: 机器学习
-draft: false
+draft: true
 # image: ./images/firefly2.avif
 ---
 # 从零搭建 KNN 鸢尾花分类器：全流程实践 + 交叉验证调参
