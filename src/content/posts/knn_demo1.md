@@ -1,6 +1,6 @@
 ---
 title: KNN项目实战：糖尿病数据集回归任务
-published: 2026-07-24
+published: 2026-07-23
 pinned: false
 description: 基于scikit-learn实现K近邻(KNN)回归算法，使用经典糖尿病数据集完成回归预测任务，包含数据集加载、数据划分、标准化、网格搜索交叉验证调参、模型评估与结果可视化完整流程。
 tags: [机器学习, 项目实战, KNN, sklearn, 回归算法]
